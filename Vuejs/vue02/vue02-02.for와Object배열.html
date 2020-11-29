@@ -43,3 +43,60 @@
 </body>
 
 </html>
+
+<script>
+       var objarray = [
+            { text: 'One', value: 'A' },
+            { text: 'Two', value: 'B' },
+            { text: 'One', value: 'C' },
+            { text: 'One', value: 'd' }
+        ];
+  
+        //1.  { text: 'Four', value: 'D' } 를 추가
+        objarray[objarray.length]=  { text: 'Four', value: 'D' };
+       // objarray.push({ text: 'Four', value: 'D' });
+
+
+
+        //2. { text: 'Two', value: 'B' },를 { text: '2', value: '2' } 로 변경
+        objarray[1]=  { text: '2', value: '2' }; // 새로운 객체를 만듬 -> 뷰나 리액트는 새롭게바꿈
+        //objarray[1].text="2"; 수정의 의미
+        //objarray[1].value="2";  수정의 의미
+       
+        //3.  { text: 'Three', value: 'C' } 삭제
+        objarray.splice(2,1);
+        //objarray.pop(); 마지막 요소삭제
+
+
+        //,4 'text'가 'one'인 객체 찾기
+        var arrOne=[]
+         for(var i=0; i<objarray.length-1; i++){
+            var obj = objarray[i];
+            if(obj.text=='One'){
+                arrOne[arrOne.length]=obj;
+
+            }else{
+
+            }
+
+         }   
+         var arrOne2 =  objarray.filter(function(item,index){
+            if (item.text =='One'){
+                return true
+            }else{
+                return false
+            }
+         }).map(function(item,index){
+            return item['price']=0
+         })
+
+         console.log(arrOne);
+         console.log(arrOne2);
+
+
+
+        
+
+
+
+</script>

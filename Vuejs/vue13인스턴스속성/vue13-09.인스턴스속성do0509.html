@@ -46,15 +46,75 @@
             }
         }
       문제 2. 같이
-        watch 속성을 이용하여 data 속성의 변화를 감지하여 console.log로 출력하시오.
+      data 속성을 이용하여 입력된 값을 화면에 출력하시오.
+
+      문제 2. 같이
+      computed 속성을 이용하여 입력된 값을 화면에 출력하시오.
+
+      문제 2. 같이
+      watch 속성을 이용하여 입력된 값을 화면에 출력하시오.
 
     </xmp>
     <hr>
     <div id="app">
         <input type="text" name="message" id="message" v-on:keyup="msgKey">
+        <br>
+        <span>{{msg1}}</span>
+        <br>
+        <span>{{msg2}}</span>
+        <br>
+        <span>{{msg3}}</span> 
     </div>
 
 </body>
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"> /* JSX를 자바스크립트로 변환 */</script>
+<script src="https://unpkg.com/vuex@3.3.0/dist/vuex.js"> /* vuex 플러그인 임포트 */</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"> /* axios 플러그인 임포트 */</script>
+<script src="https://unpkg.com/vue-router@3.1.6/dist/vue-router.js"> /* vue 라우터 플러그인 임포트 */</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> /* jQuery library */</script>
+<script>
+    new Vue({
+        /* edtmc^2w */
+        el: "#app",
+        data: {
+          msg1:"",
+          msg3:"",
+        },
+        //template: ``,
+        methods: {
+          msgKey:function(e){
+            var val = e.target.value;
+
+           //this.$data.msg1=val
+           this.$set(this.$data, "msg1", val )
+          }
+        },
+        components: {
+    
+        }, 
+        computed: {
+         
+        },
+        watch: {
+          msg1:function(ew){
+            //val는 this.$data.msg1이 변경되었을때 전달되는값
+            // 서버호출 시
+            //회원가입시 사용가능아이디
+            this.$data.msg3 = ew +"watch에서 생성"
+          }
+        },
+        mounted: function() {
+            console.log("mounted");
+        },
+        updated: function() {
+            console.log("updated");
+        },
+    });
+    
+</script>
 
 </html>
 

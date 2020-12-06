@@ -39,6 +39,20 @@
                 </tr>
             </tbody>
         </table>
+        <br>
+        <label for="">
+            이름:
+        </label>       
+        <input v-model:value="name" type="text">
+        <label for="">
+            전화번호:
+        </label>
+        <input  v-model:value="tel" type="text">
+        <label for="">
+            주소:
+        </label>
+        <input v-model:value="address" type="text">
+        <button v-on:click="clickAdd">추가</button>
     </div>
 
 
@@ -49,3 +63,71 @@
 </html>
 
 <!-- vue 플러그인 임포트   -->
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"> /* JSX를 자바스크립트로 변환 */</script>
+<script src="https://unpkg.com/vuex@3.3.0/dist/vuex.js"> /* vuex 플러그인 임포트 */</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"> /* axios 플러그인 임포트 */</script>
+<script src="https://unpkg.com/vue-router@3.1.6/dist/vue-router.js"> /* vue 라우터 플러그인 임포트 */</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> /* jQuery library */</script>
+<script>
+    new Vue({
+        /* edtmc^2w */
+        el: "#app",
+        data: {
+            contacts : [
+                {name:"가수a",tel:"010-1111-1111",address:"서울"},
+                {name:"예츠비",tel:"010-2222-2222",address:"경기"},
+                {name:"예린",tel:"010-1336-1591",address:"부산"},
+                {name:"제이미",tel:"010-1112-1357",address:"광주"},
+            ],
+            name:'',
+            tel:'',
+            address:'',
+           
+        },
+        //template: ``,
+        methods: {
+         /*   clickAdd:function(e){
+              console.log(e.target);
+              var end =this.$data.contacts.length
+              var obj ={
+                name:"제니",
+                tel:"010-9898-4557",
+                address:"천안"
+              }
+              this.$set(this.$data.contacts, end, obj);
+            }*/
+            //유효성검사
+            
+            //객체생성
+            clickAdd:function(e){
+               var end = this.$data.contacts.length;
+               var obj = {
+                    name : this.$data.name,
+                    tel : this.$data.tel,
+                    address : this.$data.address,
+               }
+               //배열추가
+                this.$set(this.$data.contacts,end,obj)
+            }
+        },
+        components: {
+    
+        }, 
+        computed: {
+    
+        },
+        watch: {
+    
+        },
+        mounted: function() {
+            console.log("mounted");
+        },
+        updated: function() {
+            console.log("updated");
+        },
+    });
+    
+</script>

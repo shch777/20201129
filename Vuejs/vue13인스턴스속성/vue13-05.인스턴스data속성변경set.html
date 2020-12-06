@@ -59,8 +59,9 @@
                 msg2: 123, /* number */
                 msg3: true, /* boolen */
             }
-            1. Vue.set(this.$data,"msg1", "bbb");
-            2. this.$set(this.$data, "msg1", "ccc");
+
+            1. this.$set(this.$data, "msg1", "ccc");
+            2. Vue.set(this.$data,"msg1", "bbb");
             3. this.$data["msg1"] = "ddd";
             4. this.$data.msg1 = "ddd";
 
@@ -74,15 +75,15 @@
                     { a:31, b: "32"} ,
                 ]
             }
-                
-            1. Vue.set(object, key, value) 방식 
+            
+            1. this.$set(object, key, value) 방식.
+            this.$set() 은 Vue 인스턴스 의 인스턴스 메서드
+            this.$set(this.$data.msg4, 0, 300);
+
+            2. Vue.set(object, key, value) 방식 
                 Vue.set() 은 Vue prototype 의 static 메서드
                 Vue.set(this.$data.msg4, 0, 100);
-
-            2. this.$set(object, key, value) 방식.
-                this.$set() 은 Vue 인스턴스 의 인스턴스 메서드
-                this.$set(this.$data.msg4, 0, 300);
-
+           
             3. spread 연산자 방식 ==> 배열을 새로 만든 뒤 할당. ES6 에서만 가능.
                 var arr_copy=[...this.$data.msg4, 70];
 
@@ -92,7 +93,7 @@
         실행 순서와 결과 예시
             (1) [100, 2, 3, 4, 5]       <== 방법1을 적용
             (2) [100, 300, 3, 4, 5]     <== 방법2을 적용
-            (3) [100, 300, 3, 4, 5, 70] <== 방법3을 적용
+            (3) [3, 4, 5] <== 방법3을 적용
             (4) [500, 3, 4, 5, 70]      <== 방법4을 적용
 
     </xmp>
@@ -110,4 +111,62 @@
 </html>
 
 <!-- vue 플러그인 임포트   -->
-
+
+
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"> /* JSX를 자바스크립트로 변환 */</script>
+<script src="https://unpkg.com/vuex@3.3.0/dist/vuex.js"> /* vuex 플러그인 임포트 */</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"> /* axios 플러그인 임포트 */</script>
+<script src="https://unpkg.com/vue-router@3.1.6/dist/vue-router.js"> /* vue 라우터 플러그인 임포트 */</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> /* jQuery library */</script>
+<script>
+    new Vue({
+        /* edtmc^2w */
+        el: "#app",
+        data: {
+            arr:[1,2,3,4,5],
+        },
+        //template: ``,
+        methods: {
+            change1: function(event){
+               //this.$data.arr[0]=100 -> 배열내부 변경불가능
+               //this.$data.arr=[100,2,323,3] -> 배열 새롭게 만든것이기때문에가능
+               this.$set( this.$data.arr,0,100)
+            },
+            change2 : function(e){
+                this.$set(this.$data.arr,1,300);//update
+                console.log(this.$data.arr[0]); //read
+            },
+            change3: function(){
+                this.$data.arr.splice(0,2);
+            },
+            change4:function(){
+                //spread 연산자
+                var arr = [500,...this.$data.arr,70];
+                console.log(arr); 
+                this.$set(this.$data,"arr", arr)
+                //this.$data.arr.spread(0,500) 
+                //전체를 다바꾼다 -> 이름안쓴다
+            
+            }
+        },
+        components: {
+    
+        }, 
+        computed: {
+    
+        },
+        watch: {
+    
+        },
+        mounted: function() {
+            console.log("mounted");
+        },
+        updated: function() {
+            console.log("updated");
+        },
+    });
+    
+</script>
+
